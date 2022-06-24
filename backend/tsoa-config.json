@@ -1,0 +1,15 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/**/*Controller.ts"
+  ],
+  "spec": {
+    "outputDirectory": "src-tsoa-autogen",
+    "specVersion": 3
+  },
+  "routes": {
+    "routesDir": "src-tsoa-autogen",
+    "iocModule": "src/ioc.ts"
+  }
+}

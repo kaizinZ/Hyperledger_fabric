@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["@types"],
+    "sourceMap": true,
+    "target": "es5",
+    "module": "esnext",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "es2020", "dom" ],
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@db-course/api-client",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "openapi-generator-cli generate -g typescript-fetch -i ../../backend/src-tsoa-autogen/swagger.json -o src-openapi-autogen/ --additional-properties enumPropertyNaming=UPPERCASE --additional-properties stringEnums=true --additional-properties typescriptThreePlus=true",
+    "test": "echo \"no test\"",
+    "lint": "echo \"lint command\"",
+    "precommit": "echo \"precommit command\""
+  },
+  "license": "ISC",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.3.3"
+  }
+}
