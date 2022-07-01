@@ -2,6 +2,7 @@
 
 ## 生鮮食品のトレーサビリティ管理
 食品のトレーサビリティを管理し、各店舗での在庫管理に役立てるアプリケーションを開発する。
+
 在庫管理から、商品の欠品に対しアクションを素早く起こすことで売り上げ向上を狙う。
 
 ## 想定するサプライチェーン
@@ -13,7 +14,7 @@
 - node >= 14.18.1
 - npm >= 7.24.2
 
-## 動かし方
+## node.jsのインストール
 まず、必要モジュールをインストールする。
 プロジェクトルートディレクトリで、次のコマンドを叩く。
 ```
@@ -28,4 +29,16 @@ npm run dev
 最後に、webappディレクトリで、次のコマンドを叩くと、フロントエンドが起動する。
 ```
 npm run dev
+```
+
+For Mac
+```
+brew install nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+source ~/.zshrc
+nodebrew setup
+nodebrew install-binary <version>
+nodebrew use <version>
+npm install npm@<version>
+exec $SHELL -l
 ```
