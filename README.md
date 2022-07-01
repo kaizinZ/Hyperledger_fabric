@@ -31,7 +31,7 @@ npm run dev
 npm run dev
 ```
 
-For Mac
+### For Mac
 ```
 brew install nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
