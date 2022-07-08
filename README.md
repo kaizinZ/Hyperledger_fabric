@@ -6,7 +6,6 @@
 在庫管理から、商品の欠品に対しアクションを素早く起こすことで売り上げ向上を狙う。
 
 説明スライド：
-
 https://docs.google.com/presentation/d/127pMOvdjudUj7D4TXq4rqCM4_Q7BZy1XfQIXtW_u_Uw/edit?usp=sharing
 
 ## 想定するサプライチェーン
