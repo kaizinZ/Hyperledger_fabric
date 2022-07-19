@@ -1,0 +1,5 @@
+
+        "precommit": "npm-run-all --parallel precommit:*",
+        "precommit:backend": "npm run precommit -w @db-course/backend",
+        "precommit:webapp": "npm run precommit -w @db-course/webapp",
+        "precommit:common": "npm run precommit -w common",

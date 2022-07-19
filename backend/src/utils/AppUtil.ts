@@ -15,6 +15,9 @@ const buildCCPOrg1 = (): Record<string, any> => {
         "..",
         "..",
         "..",
+        "..",
+        "..",
+        "fabric-samples",
         "test-network",
         "organizations",
         "peerOrganizations",
@@ -41,6 +44,9 @@ const buildCCPOrg2 = (): Record<string, any> => {
         "..",
         "..",
         "..",
+        "..",
+        "..",
+        "fabric-samples",
         "test-network",
         "organizations",
         "peerOrganizations",
@@ -60,7 +66,7 @@ const buildCCPOrg2 = (): Record<string, any> => {
     return ccp;
 };
 
-const buildWallet = async (walletPath: string): Promise<Wallet> => {
+const buildWallet = async (walletPath?: string): Promise<Wallet> => {
     // Create a new  wallet : Note that wallet is for managing identities.
     let wallet: Wallet;
     if (walletPath) {
