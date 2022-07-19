@@ -14,6 +14,7 @@ https://docs.google.com/presentation/d/127pMOvdjudUj7D4TXq4rqCM4_Q7BZy1XfQIXtW_u
 基本的には、次のversionに合わせると良い。
 - node >= 14.18.1
 - npm >= 7.24.2
+- go >= 1.18.4
 
 ## node.jsのインストール
 まず、必要モジュールをインストールする。
@@ -41,5 +42,6 @@ nodebrew setup
 nodebrew install-binary <version>
 nodebrew use <version>
 npm install npm@<version>
+brew install go@<version>
 exec $SHELL -l
 ```
