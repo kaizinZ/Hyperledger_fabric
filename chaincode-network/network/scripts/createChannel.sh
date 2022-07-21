@@ -84,7 +84,6 @@ createChannelGenesisBlock
 
 FABRIC_CFG_PATH=$PWD/../config/
 BLOCKFILE="./channel-artifacts/${CHANNEL_NAME}.block"
-echo "${BLOCKFILE}"
 ## Create channel
 infoln "Creating channel ${CHANNEL_NAME}"
 createChannel

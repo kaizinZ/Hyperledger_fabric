@@ -28,7 +28,6 @@ setGlobals() {
   else
     USING_ORG="${OVERRIDE_ORG}"
   fi
-  echo "$USING_ORG"
   infoln "Using organization ${USING_ORG}"
   if [ $USING_ORG -eq 1 ]; then
     export CORE_PEER_LOCALMSPID="Org1MSP"
