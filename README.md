@@ -52,15 +52,4 @@ npm run dev
 ```
 localhost:3000 をブラウザで開くと、アプリケーションのトップページを見ることができる。
 
-### For Mac
-```
-brew install nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-source ~/.zshrc
-nodebrew setup
-nodebrew install-binary <version>
-nodebrew use <version>
-npm install npm@<version>
-brew install go@<version>
-exec $SHELL -l
 ```
