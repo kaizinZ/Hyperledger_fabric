@@ -30,6 +30,15 @@ npm run network-up
 ```
 npm run network-down
 ```
+次に、HyperLedger-Fabricに保存しないデータを保存するために使用するMySQLサーバを立てる。
+以下のコマンドをbackendディレクトリで叩く。
+```
+npm run docker:dev
+```
+次にデータベースのマイグレーションをするために、以下のコマンドを叩く。
+```
+npm run migration:run
+```
 
 次に、backendディレクトリで、次のコマンドを叩き、backendを起動する。
 ```
