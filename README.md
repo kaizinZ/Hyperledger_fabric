@@ -49,6 +49,7 @@ npm run dev
 ```
 npm run dev
 ```
+localhost:3000 をブラウザで開くと、アプリケーションのトップページを見ることができる。
 
 ### For Mac
 ```
