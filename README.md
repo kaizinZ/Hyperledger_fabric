@@ -15,6 +15,7 @@ https://docs.google.com/presentation/d/127pMOvdjudUj7D4TXq4rqCM4_Q7BZy1XfQIXtW_u
 - node >= 14.18.1
 - npm >= 7.24.2
 - go >= 1.18.4
+- Ubuntu 20.04 (Linux なら可)
 
 ## node.jsのインストール
 まず、必要モジュールをインストールする。
