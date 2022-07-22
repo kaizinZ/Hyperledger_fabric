@@ -11,7 +11,7 @@
         "precommit:common": "",
         "lint:common": "npm run lint -w common",
         "build:common": "npm run build -w common",
-        "network-up": "./chaincode-network/network/network.sh up createChannel -s couchdb -ca && ./chaincode-network/network/network.sh deployCC -ccn ledger -ccp ../chaincode-go/ -ccl go -ccep \"OR('Org1MSP.peer','Org2MSP.peer','Org3MSP.peer','Org4MSP.peer','Org5MSP.peer')\"",
+        "network-up": "./chaincode-network/network/network.sh up && ./chaincode-network/network/network.sh createChannel -s couchdb -ca && ./chaincode-network/network/network.sh deployCC -ccn ledger -ccp ../chaincode-go/ -ccl go -ccep \"OR('Org1MSP.peer','Org2MSP.peer','Org3MSP.peer','Org4MSP.peer','Org5MSP.peer')\"",
         "network-down": "./chaincode-network/network/network.sh down"
     },
     "workspaces": [
