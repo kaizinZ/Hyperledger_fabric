@@ -4,6 +4,7 @@ ROOTDIR=$(cd "$(dirname "$0")" && pwd)
 export PATH=${ROOTDIR}/../bin:${PWD}/../bin:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
 export VERBOSE=false
+PLATFORM="Linux"
 
 pushd ${ROOTDIR} > /dev/null
 trap "popd > /dev/null" EXIT
@@ -466,6 +467,10 @@ while [[ $# -ge 1 ]] ; do
     CCAAS_DOCKER_RUN="$2"
     shift
     ;;
+  -platform )
+    PLATFORM="$2"
+    shift
+    ;;
   -verbose )
     VERBOSE=true
     ;;
@@ -477,6 +482,14 @@ while [[ $# -ge 1 ]] ; do
   esac
   shift
 done
+PLATFORM="Linux"
+echo "$PLATFORM"
+if [ $PLATFORM == "Linux" ]; then
+  export PATH=${ROOTDIR}/../bin_for_linux:${PWD}/../bin_for_linux:$PATH
+else
+  export PATH=${ROOTDIR}/../bin_for_mac:${PWD}/../bin_for_mac:$PATH
+fi
+echo "${PATH}"
 
 # Are we generating crypto material with this command?
 if [ ! -d "organizations/peerOrganizations" ]; then
