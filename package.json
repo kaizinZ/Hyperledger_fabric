@@ -5,12 +5,14 @@
         "postinstall": "npm-run-all postinstall:*",
         "postinstall:backend": "npm run codegen -w @db-course/backend",
         "postinstall:api-client": "npm run build -w @db-course/api-client",
-        "precommit": "npm-run-all --parallel precommit:*",
-        "precommit:backend": "npm run precommit -w @db-course/backend",
-        "precommit:webapp": "npm run precommit -w @db-course/webapp",
-        "precommit:common": "npm run precommit -w common",
+        "precommit": "",
+        "precommit:backend": "",
+        "precommit:webapp": "",
+        "precommit:common": "",
         "lint:common": "npm run lint -w common",
-        "build:common": "npm run build -w common"
+        "build:common": "npm run build -w common",
+        "network-up": "./chaincode-network/network/network.sh up createChannel -s couchdb -ca && ./chaincode-network/network/network.sh deployCC -ccn ledger -ccp ../chaincode-go/ -ccl go -ccep \"OR('Org1MSP.peer','Org2MSP.peer','Org3MSP.peer','Org4MSP.peer','Org5MSP.peer')\"",
+        "network-down": "./chaincode-network/network/network.sh down"
     },
     "workspaces": [
         "backend",
