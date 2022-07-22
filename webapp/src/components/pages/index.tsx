@@ -1,49 +1,30 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Box } from "@mui/material"
+import { Box, List } from "@mui/material"
 
 import { createApiClient } from "../../utils/ApiClientFactory";
+import { OrganizationModel, Status } from "@db-course/api-client/src-openapi-autogen";
+import { TitleListItem } from "../Organisms/TitleListItem";
+import { useHistory } from "react-router";
 
 
 
 
 export const Top: React.VFC = () => {
+  const history = useHistory()
   const [count, setCount] = useState<number>(0)
-  const [assets, setAssets] = useState<any[]>([])
+  const [organizations, setOrganizations] = useState<OrganizationModel[]>([])
   const [name, setName] = useState<string>("")
+  
 
-  const onClick = useCallback(async () => {
-    // await (await createApiClient()).test({
-    //   createTestBody: {
-    //     name: name
-    //   }
-    // })
-    setName("")
-    const response = await (await createApiClient()).getTestAssets()
-    setAssets(response)
-  }, [name])
-
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setName(e.target.value)
+  const onClick = (organizationId: string) => () => {
+    history.push(`/organizations/${organizationId}`)
   }
 
   useEffect(() => {
     (async () => {
-    //   const response = await (await createApiClient()).test({
-    //     createAssetRequestBody: {
-    //       from: "Tanaka",
-    //       fromId: "1",
-    //       to: "Factory B",
-    //       toId: "2",
-    //       dueDate: new Date(),
-    //       amount: 100,
-    //       status: Status.SALE,
-    //       name: "tuna"
-    //     }
-    //   })
-      const response = await (await createApiClient()).testQuery()
-      console.log(response)
-      // setAssets(response)
+      const response = await (await createApiClient()).getAllOrganizations()
+      setOrganizations(response)
     })()
   }, [])
 
@@ -53,42 +34,11 @@ export const Top: React.VFC = () => {
       display: "flex",
       justifyContent: "center"
     }}>
-      {/* <Box>
-        <List>
-          <ListItem>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: 2
-              }}>
-                <Box>
-                {"from"}
-                </Box>
-                <Box>
-              {"to"}
-                </Box>
-            </Box> */}
-          {/* </ListItem>
-        {models.map((model) => 
-          <ListItem>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: 2
-              }}>
-                <Box>
-                {model.from}
-                </Box>
-                <Box>
-              {model.to}
-                </Box>
-            </Box>
-          </ListItem>
-        )} */}
-        {/* </List> */}
-      {/* </Box> */}
+      <List>
+        {organizations.map((organization) => (
+          <TitleListItem key={organization.organizationId} title={organization.domain} onClick={onClick(organization.organizationId)} />
+        ))}
+      </List>
     </Box>
   )
 };

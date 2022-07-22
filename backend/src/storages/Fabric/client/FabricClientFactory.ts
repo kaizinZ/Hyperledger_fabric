@@ -1,23 +1,22 @@
-import { buildCAClient, enrollAdmin } from "../../../utils/CAUtil";
-import { buildCCPOrg1, buildWallet } from "../../../utils/AppUtil";
+import { buildCAClient, enrollAdmin, registerAndEnrollUser } from "../../../utils/CAUtil";
+import { buildCCPOrg, buildWallet, createWalletPath } from "../../../utils/AppUtil";
 
 import { FabricClient } from "./FabricClient";
 import { Gateway, GatewayOptions } from "fabric-network";
-import { chaincodeName, channelName, mspOrg1, walletPath } from "../../constants";
+import { chaincodeName, channelName } from "../../constants";
 
 export class FabricClientFactory {
     private static fabricClient: FabricClient;
 
-    public static async build() {
+    public static async build(organizationNumber: number) {
         if (this.fabricClient === undefined) {
-            const ccp = buildCCPOrg1();
-            const caClient = buildCAClient(ccp, "ca.org1.example.com");
-            const wallet = await buildWallet(walletPath);
+            const ccp = buildCCPOrg(organizationNumber)
+            const caClient = buildCAClient(ccp, `ca.org${organizationNumber}.example.com`)
+            const wallet = await buildWallet(createWalletPath(organizationNumber))
             try {
-                await enrollAdmin(caClient, wallet, mspOrg1);
-                // await registerAndEnrollUser(caClient, wallet, mspOrg1, org1UserId, "org1.department1");
-            } catch (e) {
-                console.error(e);
+                await enrollAdmin(caClient, wallet, `Org${organizationNumber}MSP`)
+            } catch(e) {
+                console.error(e)
             }
             const gateway = new Gateway();
             const gatewayOpts: GatewayOptions = {
@@ -30,7 +29,6 @@ export class FabricClientFactory {
             const contract = network.getContract(chaincodeName);
             this.fabricClient = new FabricClient(contract);
         }
-
         return this.fabricClient;
     }
 }

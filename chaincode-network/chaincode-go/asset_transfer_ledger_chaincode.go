@@ -98,6 +98,8 @@ type Asset struct {
 	Amount         int `json:"amount"`
 	Name           string `json:"name"`
 	Status         string    `json:"status"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
 }
 
 // HistoryQueryResult structure used for returning result of history query
@@ -116,7 +118,7 @@ type PaginatedQueryResult struct {
 }
 
 // CreateAsset initializes a new asset in the ledger
-func (t *SimpleChaincode) CreateAsset(ctx contractapi.TransactionContextInterface, assetID, from string, fromId string, to string, toId string, dueDate time.Time, amount int, name string, status string) error {
+func (t *SimpleChaincode) CreateAsset(ctx contractapi.TransactionContextInterface, assetID, from string, fromId string, to string, toId string, dueDate time.Time, amount int, name string, status string, createdAt time.Time, updatedAt time.Time) error {
 	exists, err := t.AssetExists(ctx, assetID)
 	if err != nil {
 		return fmt.Errorf("failed to get asset: %v", err)
@@ -136,6 +138,8 @@ func (t *SimpleChaincode) CreateAsset(ctx contractapi.TransactionContextInterfac
 		Amount: amount,
 		Name: name,
 		Status: status,
+		CreatedAt: createdAt,
+		UpdatedAt: updatedAt,
 	}
 	assetBytes, err := json.Marshal(asset)
 	if err != nil {

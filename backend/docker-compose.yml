@@ -1,0 +1,41 @@
+# Use root/example as user/password credentials
+version: '3.1'
+services:
+  
+  mysql:
+    container_name: amecloud-mysql
+    image: mysql:8.0.23
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: devpassword
+      MYSQL_DATABASE: dev
+    ports:
+      - 13306:3306
+
+  adminer:
+    container_name: amecloud-adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8500:8080 # http://localhost:8500/ でアクセスできる
+
+  backend:
+    image: amecloud/backend-api:latest
+    profiles:
+      - backend
+    environment:
+      AME_CLOUD_STAGING_LEVEL: local
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 13306
+      MYSQL_USERNAME: root
+      MYSQL_DATABASE: dev
+      MYSQL_PASSWORD: devpassword
+      RDB_ENCRYPTION_KEY: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+      PROFILE: dev
+      JWKS_URL: https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_O0i5585rZ/.well-known/jwks.json
+      COGNITO_ISSUER: https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_O0i5585rZ
+      DOCUMENTS_BUCKET: documents
+    network_mode: host
+

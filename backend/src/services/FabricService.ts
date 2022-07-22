@@ -24,18 +24,27 @@ export class FabricService {
     private fabricClient?: FabricClient;
 
     constructor() {
-        FabricClientFactory.build().then((fabricClient) => {
+        FabricClientFactory.build(1).then((fabricClient) => {
             this.fabricClient = fabricClient;
         });
     }
 
     public async createAsset(params: CreateAssetParams): Promise<AssetModel> {
+        await this.setFabricClient()
         return this.fabricClient!.createAsset(params);
     }
 
     public async getAssetsByName(name: string): Promise<AssetModel[]> {
+        await this.setFabricClient()
         const query = FabricQuery.build().addQuery("name", name).getQuery();
         const entities = await this.fabricClient!.getAssetByQuery(query);
         return entities.map(AssetModel.fromEntity);
+    }
+
+    private async setFabricClient(): Promise<void> {
+        if (this.fabricClient === undefined) {
+            const fabricClient = await FabricClientFactory.build(1)
+            this.fabricClient = fabricClient
+        }
     }
 }

@@ -4,6 +4,7 @@
 import { Container, decorate, injectable } from "inversify";
 import { buildProviderModule } from "inversify-binding-decorators";
 import { Controller } from "tsoa";
+import { registerAllMySqlRepositoriesToIoCContainer } from "./storages/mysql";
 
 const iocContainer = new Container();
 decorate(injectable(), Controller); // TSOA のコントローラに対して依存性を注入できるようにする。
@@ -13,8 +14,7 @@ iocContainer.load(buildProviderModule());
 export const initializeIoCContainer = async (): Promise<Container> => {
     console.log("IoC Containerを初期化しています...");
 
-    //  registerAllMySqlRepositoriesToIoCContainer(iocContainer);
-    //  registerEventQueuesToIoCContainer(iocContainer);
+    registerAllMySqlRepositoriesToIoCContainer(iocContainer);
 
     return iocContainer;
 };

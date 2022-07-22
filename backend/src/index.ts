@@ -4,9 +4,11 @@ import express from "express";
 import cors from "cors";
 import { RegisterRoutes } from "../src-tsoa-autogen/routes";
 import { initializeIoCContainer } from "./ioc";
+import { establishMySqlConnection } from "./storages/mysql";
 
 const initializeExpressApp = async () => {
     await initializeIoCContainer();
+    await establishMySqlConnection()
     const app = express();
 
     app.use(cors({ origin: "http://localhost:3000" }));
