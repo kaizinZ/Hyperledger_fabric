@@ -22,6 +22,14 @@ https://docs.google.com/presentation/d/127pMOvdjudUj7D4TXq4rqCM4_Q7BZy1XfQIXtW_u
 ```
 npm install
 ```
+次に、chaincodeのネットワークを立ち上げるために、次のコマンド叩く。
+```
+npm run network-up
+```
+但し、すでにネットワークが立ち上がっている場合は、次のコマンドを叩いて、以前に立ち上げたネットワークを消してから、ネットワークを構築する。
+```
+npm run network-down
+```
 
 次に、backendディレクトリで、次のコマンドを叩き、backendを起動する。
 ```
