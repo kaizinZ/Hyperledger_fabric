@@ -20,7 +20,7 @@ https://docs.google.com/presentation/d/127pMOvdjudUj7D4TXq4rqCM4_Q7BZy1XfQIXtW_u
 まず、必要モジュールをインストールする。
 プロジェクトルートディレクトリで、次のコマンドを叩く。
 ```
-npm install
+npm ci
 ```
 次に、chaincodeのネットワークを立ち上げるために、次のコマンド叩く。
 ```
