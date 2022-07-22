@@ -1,8 +1,4 @@
-/*
- * Copyright IBM Corp. All Rights Reserved.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Wallet, Wallets } from "fabric-network";
 import * as fs from "fs";

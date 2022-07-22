@@ -1,8 +1,4 @@
-/*
- * Copyright IBM Corp. All Rights Reserved.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import FabricCAServices from "fabric-ca-client";
 import { Wallet } from "fabric-network";

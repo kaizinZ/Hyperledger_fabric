@@ -1,16 +1,12 @@
-
-import { provide } from "inversify-binding-decorators";
-import { buildCAClient, enrollAdmin, registerAndEnrollUser } from "../../utils/CAUtil";
-import { buildCCPOrg1, buildWallet } from "../../utils/AppUtil";
+import { buildCAClient, enrollAdmin } from "../../../utils/CAUtil";
+import { buildCCPOrg1, buildWallet } from "../../../utils/AppUtil";
 
 import { FabricClient } from "./FabricClient";
-import { Contract, Gateway, GatewayOptions } from "fabric-network";
-import { chaincodeName, channelName, mspOrg1, org1UserId, walletPath } from "../constants";
-
-
+import { Gateway, GatewayOptions } from "fabric-network";
+import { chaincodeName, channelName, mspOrg1, walletPath } from "../../constants";
 
 export class FabricClientFactory {
-    private static fabricClient: FabricClient
+    private static fabricClient: FabricClient;
 
     public static async build() {
         if (this.fabricClient === undefined) {
@@ -20,11 +16,9 @@ export class FabricClientFactory {
             try {
                 await enrollAdmin(caClient, wallet, mspOrg1);
                 // await registerAndEnrollUser(caClient, wallet, mspOrg1, org1UserId, "org1.department1");
-
-            } catch(e) {
-                console.log(e)
+            } catch (e) {
+                console.error(e);
             }
-            console.log("aa")
             const gateway = new Gateway();
             const gatewayOpts: GatewayOptions = {
                 wallet,
@@ -34,9 +28,9 @@ export class FabricClientFactory {
             await gateway.connect(ccp, gatewayOpts);
             const network = await gateway.getNetwork(channelName);
             const contract = network.getContract(chaincodeName);
-            this.fabricClient = new FabricClient(contract)
+            this.fabricClient = new FabricClient(contract);
         }
 
-        return this.fabricClient
+        return this.fabricClient;
     }
 }

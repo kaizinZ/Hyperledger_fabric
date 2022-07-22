@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { provide } from "inversify-binding-decorators";
 
-import { Gateway, GatewayOptions } from "fabric-network";
-import { buildCCPOrg1, buildWallet, prettyJSONString } from "../utils/AppUtil";
-import { buildCAClient, enrollAdmin, registerAndEnrollUser } from "../utils/CAUtil";
-import { FabricClient } from "src/Entities/Fabric/FabricClient";
-import { FabricClientFactory } from "src/Entities/Fabric/FabricClientFactory";
-import { Status } from "../Entities/constants";
+import { Status } from "../storages/constants";
+import { AssetModel } from "src/models/AssetModel";
+import { FabricClient } from "../storages/Fabric/client/FabricClient";
+import { FabricClientFactory } from "../storages/Fabric/client/FabricClientFactory";
+import { FabricQuery } from "src/storages/Fabric/client/FabricQuery";
 
 type CreateAssetParams = {
     from: string;
@@ -15,8 +16,8 @@ type CreateAssetParams = {
     dueDate: Date;
     amount: number;
     name: string;
-    status: Status
-}
+    status: Status;
+};
 
 @provide(FabricService)
 export class FabricService {
@@ -24,17 +25,17 @@ export class FabricService {
 
     constructor() {
         FabricClientFactory.build().then((fabricClient) => {
-            this.fabricClient = fabricClient
-        })
+            this.fabricClient = fabricClient;
+        });
     }
 
-    public async createAsset(params: CreateAssetParams): Promise<any> {
-        return this.fabricClient?.createAsset(params)
+    public async createAsset(params: CreateAssetParams): Promise<AssetModel> {
+        return this.fabricClient!.createAsset(params);
     }
 
-    public async getAllTestAssets(): Promise<any[]> {
-        const res = await  this.fabricClient?.getAllAssets()
-        console.log(res)
-        return res
+    public async getAssetsByName(name: string): Promise<AssetModel[]> {
+        const query = FabricQuery.build().addQuery("name", name).getQuery();
+        const entities = await this.fabricClient!.getAssetByQuery(query);
+        return entities.map(AssetModel.fromEntity);
     }
 }
